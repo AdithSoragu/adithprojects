@@ -1,0 +1,89 @@
+verilog code:
+
+module traffic_control_unit(r,g,y,clock);
+input clock;
+output reg r,g,y;
+parameter red=0;
+parameter green=1;
+parameter yellow=2;
+reg [2:0]t;
+reg [2:0]state;
+reg [2:0]next_state;
+
+always@(posedge clock)
+begin
+case(state)
+red:
+	begin
+			if(t<3'b101)
+		begin
+			next_state=red;
+			t=t+1;
+
+		end
+		else
+			begin
+				next_state=green;
+				t=0;
+			end
+	end
+green:
+	begin
+			if(t<3'b100)
+		begin
+			next_state=green;
+			t=t+1;
+
+		end
+		else
+			begin
+				next_state=yellow;
+				t=0;
+			end
+	end
+yellow:
+	begin
+			if(t<3'b011)
+		begin
+			next_state=yellow;
+			t=t+1;
+
+		end
+		else
+			begin
+				next_state=red;
+				t=0;
+			end
+	end
+default:next_state=red;
+endcase
+end
+
+always@(next_state)
+begin
+state<=next_state;
+end
+always@(*)
+begin
+case(state)
+red:
+begin
+	r=1'b1;
+	g=1'b0;
+	y=1'b0;
+end
+green:
+begin
+	r=1'b0;
+	g=1'b1;
+	y=1'b0;
+end
+yellow:
+begin
+	r=1'b0;
+	g=1'b0;
+	y=1'b1;
+end
+endcase
+end
+endmodule
