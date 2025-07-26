@@ -1,0 +1,18 @@
+module calculator_behavioral (
+    input      [3:0] A,
+    input      [3:0] B,
+    input      [1:0] op,       // 00: Add, 01: Sub, 10: Mul, 11: Div
+    output reg [7:0] result
+);
+
+    always @(*) begin
+        case (op)
+            2'b00: result = A + B;                 // Addition
+            2'b01: result = A - B;                 // Subtraction
+            2'b10: result = A * B;                 // Multiplication
+            2'b11: result = (B != 0) ? A / B : 8'b00000000;  // Division with zero protection
+            default: result = 8'b00000000;
+        endcase
+    end
+
+endmodule
