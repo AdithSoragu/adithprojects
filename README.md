@@ -26,19 +26,3 @@ Each project folder contains Verilog source files, explains the design logic, an
 - **Git & GitHub**
 
 ---
-
-## 📂 Project Structure
-
-```text
-adithprojects/
-│
-├── 8-bit ALU using Verilog/
-├── Design Calculator Using Verilog/
-├── Design Vending Machine using FSM/
-├── Design multi bit Barrel Shifter/
-├── FIFO mode design/
-├── traffic light control unit/
-│
-├── .gitignore
-├── LICENSE
-└── README.md
